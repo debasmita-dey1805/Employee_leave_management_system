@@ -1,0 +1,82 @@
+{% extends 'base/base.html' %}
+{% block content %}
+<div class="container-fluid">
+    <div class="row">
+        <!-- Sidebar -->
+        <div class="col-md-3 bg-light border-end min-vh-100 p-3">
+            <h5 class="mb-4">Menu</h5>
+            <ul class="nav flex-column">
+                <li class="nav-item mb-2">
+                    <a class="nav-link text-dark" href="{% url 'manager_dashboard' %}">
+                        <i class="bi bi-speedometer2"></i> Dashboard
+                    </a>
+                </li>
+                <li class="nav-item mb-2">
+                    <a class="nav-link text-dark" href="{% url 'pending_leaves' %}">
+                        <i class="bi bi-hourglass-split"></i> Pending Requests
+                    </a>
+                </li>
+                <li class="nav-item mb-2">
+                    <a class="nav-link text-dark" href="{% url 'manager_leave_calendar' %}">
+                        <i class="bi bi-calendar-event"></i> Leave Calendar
+                    </a>
+                </li>
+                <li class="nav-item mb-2">
+                    <a class="nav-link text-dark" href="{% url 'add_employee' %}">
+                        <i class="bi bi-calendar-event"></i> Add Employee
+                    </a>
+                </li>
+                <li class="nav-item mb-2">
+                    <a class="nav-link text-dark" href="{% url 'team_members' %}">
+                        <i class="bi bi-people"></i> Team Members
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link text-danger fw-semibold" href="{% url 'logout' %}">
+                        <i class="bi bi-box-arrow-right"></i> Logout
+                    </a>
+                </li>
+            </ul>
+        </div>
+
+        <!-- Main content -->
+        <div class="col-md-9 mt-4">
+            <h3 class="mb-4">Pending Leave Requests</h3>
+
+            {% if leaves %}
+                <table class="table table-bordered">
+                    <thead>
+                        <tr>
+                            <th>Employee</th>
+                            <th>Department</th>
+                            <th>Start Date</th>
+                            <th>End Date</th>
+                            <th>Reason</th>
+                            <th>Action</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for leave in leaves %}
+                        <tr>
+                            <td>{{ leave.employee.get_full_name }}</td>
+                            <td>{{ leave.employee.profile.department.name }}</td>
+                            <td>{{ leave.start_date }}</td>
+                            <td>{{ leave.end_date }}</td>
+                            <td>{{ leave.reason }}</td>
+                            <td>
+                                <a href="{% url 'approve_leave' leave.id %}" class="btn btn-success btn-sm">Approve</a>
+                                <a href="{% url 'reject_leave' leave.id %}" class="btn btn-danger btn-sm">Reject</a>
+                            </td>
+                        </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+            {% else %}
+            <div class="alert alert-info">
+                No pending leave requests found for your department.
+            </div>
+            {% endif %}
+        </div>
+    </div>
+</div>        
+{% endblock %}

@@ -1,0 +1,30 @@
+{% extends 'base/base.html' %}
+
+{% block content %}
+{% include 'dashboard/leftsidebar.html' %}
+    <!-- Calendar -->
+    <div class="col-md-9">
+        <div class="card shadow border-0 p-4">
+            <h3 class="mb-4">Leave Calendar</h3>
+            <hr>
+            <div id="calendar"></div>
+        </div>
+    </div>
+</div>
+
+<link href="https://cdn.jsdelivr.net/npm/fullcalendar@5.11.0/main.min.css" rel="stylesheet">
+<script src="https://cdn.jsdelivr.net/npm/fullcalendar@5.11.0/main.min.js"></script>
+
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+    var calendarEl = document.getElementById('calendar');
+
+    var calendar = new FullCalendar.Calendar(calendarEl, {
+        initialView: 'dayGridMonth',
+        events: '{% url "leave_events" %}'
+    });
+
+    calendar.render();
+});
+</script>
+{% endblock %}

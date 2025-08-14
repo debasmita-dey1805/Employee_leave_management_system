@@ -1,0 +1,79 @@
+{% extends 'base/base.html' %}
+{% block content %}
+
+<div class="container-fluid">
+    <div class="row">
+        <!-- Sidebar -->
+        <div class="col-md-3 bg-light border-end min-vh-100 p-3">
+            <h5 class="mb-4">Menu</h5>
+            <ul class="nav flex-column">
+                <li class="nav-item mb-2">
+                    <a class="nav-link text-dark" href="{% url 'manager_dashboard' %}">
+                        <i class="bi bi-speedometer2"></i> Dashboard
+                    </a>
+                </li>
+                <li class="nav-item mb-2">
+                    <a class="nav-link text-dark" href="{% url 'pending_leaves' %}">
+                        <i class="bi bi-hourglass-split"></i> Pending Requests
+                    </a>
+                </li>
+                <li class="nav-item mb-2">
+                    <a class="nav-link text-dark" href="{% url 'manager_leave_calendar' %}">
+                        <i class="bi bi-calendar-event"></i> Leave Calendar
+                    </a>
+                </li>
+                <li class="nav-item mb-2">
+                    <a class="nav-link text-dark" href="{% url 'add_employee' %}">
+                        <i class="bi bi-journal-plus"></i> Add Employee
+                    </a>
+                </li>
+                <li class="nav-item mb-2">
+                    <a class="nav-link text-dark" href="{% url 'team_members' %}">
+                        <i class="bi bi-people"></i> Team Members
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link text-danger fw-semibold" href="{% url 'logout' %}">
+                        <i class="bi bi-box-arrow-right"></i> Logout
+                    </a>
+                </li>
+            </ul>
+        </div>
+
+        <!-- Main Content -->
+        <div class="col-md-9 p-4">
+            <div class="row">
+              
+                <div class="col-md-6 mb-4">
+                    <div class="card shadow border-0 h-100">
+                        <div class="card-header bg-warning text-white text-center fw-bold">
+                            <h5 class="mb-0">Pending Leaves</h5>
+                        </div>
+                        <div class="card-body text-center">
+                            <h3 class="fw-bold text-dark">
+                                {{ pending_leave }}
+                            </h3>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-md-6 mb-4">
+                    <div class="card shadow border-0 h-100">
+                        <div class="card-header bg-success text-white text-center fw-bold">
+                            <h5 class="mb-0">Approved Leaves</h5>
+                        </div>
+                        <div class="card-body text-center">
+                            <h3 class="fw-bold text-dark">
+                                {{ approve_leave }}
+                            </h3>
+                        </div>
+                    </div>
+                </div>
+            </div> 
+        </div> 
+    </div> 
+</div> 
+
+
+
+{% endblock %}

@@ -1,0 +1,38 @@
+<div class="container-fluid">
+    <div class="row">
+        <!-- Sidebar -->
+        <div class="col-md-3 bg-light border-end min-vh-100 p-3">
+            <h5 class="mb-4">Menu</h5>
+            <ul class="nav flex-column">
+                <li class="nav-item mb-2">
+                    <a class="nav-link text-dark" href="{% url 'employee_dashboard' %}">
+                        <i class="bi bi-speedometer2"></i> Dashboard
+                    </a>
+                </li>
+                <li class="nav-item mb-2">
+                    <a class="nav-link text-dark" href="{% url 'apply_leave' %}">
+                        <i class="bi bi-hourglass-split"></i> Apply Leaves
+                    </a>
+                </li>
+                <li class="nav-item mb-2">
+                    <a class="nav-link text-dark" href="{% url 'my_leaves' %}">
+                        <i class="bi bi-calendar-event"></i> My Leaves
+                    </a>
+                </li>
+                <li class="nav-item mb-2">
+                    <a class="nav-link text-dark" href="{% url 'leave_calendar' %}">
+                        <i class="bi bi-people"></i> Leave Calender
+                    </a>
+                </li>
+                <li class="nav-item mb-2">
+                    <a class="nav-link text-dark" href="#">
+                        <i class="bi bi-people"></i> Profile
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link text-danger fw-semibold" href="{% url 'logout' %}">
+                        <i class="bi bi-box-arrow-right"></i> Logout
+                    </a>
+                </li>
+            </ul>
+        </div>

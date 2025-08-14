@@ -1,0 +1,75 @@
+{% extends 'base/base.html' %}
+{% block content %}
+
+<div class="container-fluid">
+    <div class="row">
+        <!-- Sidebar -->
+        <div class="col-md-3 bg-light border-end min-vh-100 p-3">
+            <h5 class="mb-4">Menu</h5>
+            <ul class="nav flex-column">
+                <li class="nav-item mb-2">
+                    <a class="nav-link text-dark" href="{% url 'manager_dashboard' %}">
+                        <i class="bi bi-speedometer2"></i> Dashboard
+                    </a>
+                </li>
+                <li class="nav-item mb-2">
+                    <a class="nav-link text-dark" href="{% url 'pending_leaves' %}">
+                        <i class="bi bi-hourglass-split"></i> Pending Requests
+                    </a>
+                </li>
+                <li class="nav-item mb-2">
+                    <a class="nav-link text-dark" href="#">
+                        <i class="bi bi-calendar-event"></i> Leave Calendar
+                    </a>
+                </li>
+                <li class="nav-item mb-2">
+                    <a class="nav-link text-dark active fw-semibold" href="{% url 'add_employee' %}">
+                        <i class="bi bi-person-plus"></i> Add Employee
+                    </a>
+                </li>
+                <li class="nav-item mb-2">
+                    <a class="nav-link text-dark" href="{% url 'team_members' %}">
+                        <i class="bi bi-people"></i> Team Members
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link text-danger fw-semibold" href="{% url 'logout' %}">
+                        <i class="bi bi-box-arrow-right"></i> Logout
+                    </a>
+                </li>
+            </ul>
+        </div>
+
+        <!-- Main content -->
+        <div class="col-md-9 p-4">
+            <h5>Team Members - {{ department_name }}</h5>
+            <table class="table table-bordered table-striped">
+                <thead>
+                    <tr>
+                        <th>Sl. No</th>
+                        <th>Full Name</th>
+                        <th>Username</th>
+                        <th>Email</th>
+                        <th>Department</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for emp in employees %}
+                    <tr>
+                        <td>{{ forloop.counter }}</td>
+                        <td>{{ emp.get_full_name|default:emp.username }}</td>
+                        <td>{{ emp.username }}</td>
+                        <td>{{ emp.email }}</td>
+                        <td>{{ emp.profile.department.name }}</td>
+                    </tr>
+                    {% empty %}
+                    <tr>
+                        <td colspan="5" class="text-center">No employees found in your department.</td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+{% endblock %}
